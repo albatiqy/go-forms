@@ -27,11 +27,12 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    // '@mdi/font/css/materialdesignicons.css',
+    '@mdi/font/css/materialdesignicons.css',
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    '~/plugins/notifier.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -40,7 +41,7 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/vuetify
-    '@nuxtjs/vuetify', // ['@nuxtjs/vuetify',{iconfont:'mdi'}],
+    ['@nuxtjs/vuetify', { iconfont: 'mdi' }],
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -57,7 +58,7 @@ export default {
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
-    // defaultAssets: false,
+    defaultAssets: false,
     customVariables: ['~/assets/variables.scss'],
     theme: {
       // dark: true,
@@ -72,7 +73,10 @@ export default {
           success: colors.green.accent3
         }
       }
-    }
+    },
+    icons: {
+      iconfont: 'mdi',
+    },
   },
 
   // router: {

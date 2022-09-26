@@ -1,83 +1,80 @@
 <template>
-  <v-row justify="center" align="center">
-    <v-col cols="12" sm="8" md="6">
-      <v-card class="logo py-4 d-flex justify-center">
-        <NuxtLogo />
-        <VuetifyLogo />
-      </v-card>
-      <v-card>
-        <v-card-title class="headline">
-          Welcome to the Vuetify + Nuxt.js template
-        </v-card-title>
+  <v-card class="mx-auto" max-width="500">
+    <v-card-title class="text-h6 font-weight-regular justify-space-between">
+      <span>{{ currentTitle }}</span>
+      <v-avatar
+        color="primary lighten-2"
+        class="subheading white--text"
+        size="24"
+        v-text="step"
+      ></v-avatar>
+    </v-card-title>
+
+    <v-window v-model="step">
+      <v-window-item :value="1">
         <v-card-text>
-          <p>Vuetify is a progressive Material Design component framework for Vue.js. It was designed to empower developers to create amazing applications.</p>
-          <p>
-            For more information on Vuetify, check out the <a
-              href="https://vuetifyjs.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              documentation
-            </a>.
-          </p>
-          <p>
-            If you have questions, please join the official <a
-              href="https://chat.vuetifyjs.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="chat"
-            >
-              discord
-            </a>.
-          </p>
-          <p>
-            Find a bug? Report it on the github <a
-              href="https://github.com/vuetifyjs/vuetify/issues"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="contribute"
-            >
-              issue board
-            </a>.
-          </p>
-          <p>Thank you for developing with Vuetify and I look forward to bringing more exciting features in the future.</p>
-          <div class="text-xs-right">
-            <em><small>&mdash; John Leider</small></em>
-          </div>
-          <hr class="my-3">
-          <a
-            href="https://nuxtjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Nuxt Documentation
-          </a>
-          <br>
-          <a
-            href="https://github.com/nuxt/nuxt.js"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Nuxt GitHub
-          </a>
+          <v-text-field label="Email" value="john@vuetifyjs.com"></v-text-field>
+          <span class="text-caption grey--text text--darken-1">
+            This is the email you will use to login to your Vuetify account
+          </span>
         </v-card-text>
-        <v-card-actions>
-          <v-spacer />
-          <v-btn
-            color="primary"
-            nuxt
-            to="/inspire"
-          >
-            Continue
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-col>
-  </v-row>
+      </v-window-item>
+
+      <v-window-item :value="2">
+        <v-card-text>
+          <v-text-field label="Password" type="password"></v-text-field>
+          <v-text-field label="Confirm Password" type="password"></v-text-field>
+          <span class="text-caption grey--text text--darken-1">
+            Please enter a password for your account
+          </span>
+        </v-card-text>
+      </v-window-item>
+
+      <v-window-item :value="3">
+        <div class="pa-4 text-center">
+          <v-img
+            class="mb-4"
+            contain
+            height="128"
+            src="https://cdn.vuetifyjs.com/images/logos/v.svg"
+          ></v-img>
+          <h3 class="text-h6 font-weight-light mb-2">Welcome to Vuetify</h3>
+          <span class="text-caption grey--text">Thanks for signing up!</span>
+        </div>
+      </v-window-item>
+    </v-window>
+
+    <v-divider></v-divider>
+
+    <v-card-actions>
+      <v-btn :disabled="step === 1" text @click="step--"> Back </v-btn>
+      <v-spacer></v-spacer>
+      <v-btn :disabled="step === 3" color="primary" depressed @click="step++">
+        Next
+      </v-btn>
+    </v-card-actions>
+  </v-card>
 </template>
 
 <script>
 export default {
-  name: 'IndexPage'
-}
+  layout: "front",
+
+  data: () => ({
+    step: 1,
+  }),
+
+  computed: {
+    currentTitle() {
+      switch (this.step) {
+        case 1:
+          return "Sign-up";
+        case 2:
+          return "Create a password";
+        default:
+          return "Account created";
+      }
+    },
+  },
+};
 </script>
